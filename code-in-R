@@ -1,0 +1,53 @@
+#This simple exercise of simulation is based on a Tweet of an argentian economist
+# he has asked : How many package of stamps you should buy to fill an album of 200 stamps?
+# Every package of stamps has 5 stamps
+# There are total of 200 differents stamps. 
+# You should fill the album with the 200 differents stamps.
+
+
+#We generate the 200 differents stamos and we save them in "figuritas" variable.
+figuritas<-as.data.frame(seq(1:200))
+
+#We set a pseudo random number
+set.seed(10)
+
+# totalpaquetes will save the total of package we have bought to meet the goal, The goal is to fill the album
+totalpaquetes <-c()
+
+#We set 5000 repetitons, that means, we fill the album of 200 different stamps 5000 times.
+for (i in 1:5000)  {  
+  
+  #For each time we fill our album, we count the package needed in "paquetes"
+  paquetes<-0
+  
+  #We use "totalfiguritas" to save all the stamps we have in each individual try for filling the album
+  
+  totalfiguritas<-c()
+  
+  #Like we need to have 200 differents stamps, we re checking in all
+  # our stamps (saved in "totalfiguritas") how many differents stamps
+  #we have.
+  
+  while ( length(unique(totalfiguritas$`seq(1:200)`))!=200 ) {       
+    #if we dont have 200 unique stamps, we buy another package 
+    #of stamps. Remember each package has 5 stamps and, it can repeated
+    # stamps in the same package.
+    samp<-as.data.frame(sample_n(figuritas, 5,replace = T))
+    
+    #for any new package we buy, we do the "inventory" of the stamps
+    #we have and save them in "totalfiguritas"
+    totalfiguritas<-rbind(totalfiguritas,samp)
+    
+    #"paquetes" counts the package we have bought for filling the album once.
+    paquetes<-paquetes+1
+    
+  }
+  
+  #We fill the album 5000 times and we count how many packages we have bought for every time we fill it
+  totalpaquetes<-rbind(totalpaquetes,paquetes)
+  }
+    
+# In average, we need to buy 235.89 packages of stamps, to fill an album
+mean(totalpaquetes)
+#We have a standard deviation +-50.56 packages for filling the album
+sd(totalpaquetes)
