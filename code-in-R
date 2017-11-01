@@ -5,13 +5,13 @@
 # You should fill the album with the 200 differents stamps.
 
 
-#We generate the 200 differents stamos and we save them in "figuritas" variable.
+#We generate the 200 differents stamps and we save them in "figuritas" variable.
 figuritas<-as.data.frame(seq(1:200))
 
 #We set a pseudo random number
 set.seed(10)
 
-# totalpaquetes will save the total of package we have bought to meet the goal, The goal is to fill the album
+# totalpaquetes will save the total of packages we have bought to meet the goal, The goal is to fill the album
 totalpaquetes <-c()
 
 #We set 5000 repetitons, that means, we fill the album of 200 different stamps 5000 times.
@@ -30,7 +30,7 @@ for (i in 1:5000)  {
   
   while ( length(unique(totalfiguritas$`seq(1:200)`))!=200 ) {       
     #if we dont have 200 unique stamps, we buy another package 
-    #of stamps. Remember each package has 5 stamps and, it can repeated
+    #of stamps. Remember each package has 5 stamps and, it can there be repeated
     # stamps in the same package.
     samp<-as.data.frame(sample_n(figuritas, 5,replace = T))
     
